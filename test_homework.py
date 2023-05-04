@@ -1,7 +1,10 @@
 from homework import *
+from pytest import approx
+import numpy as np
 import sqlite3
 import pandas as pd
 import requests
+import sklearn
 
 
 def test_python():
@@ -25,4 +28,19 @@ def test_sql():
 
     assert set(product_df['quantity_in_stock']) == set([49, 38, 70])
     assert customer_df[mask].shape[0] == customer_df.shape[0]
+
+
+
+def test_model():
+    model = train_model()
+    features = model.feature_names_in_
+    pclass_index = np.where(features == 'PClass')[0][0]
+    sex_index = np.where(features == 'SexCode')[0][0]
+    age_index = np.where(features == 'Age')[0][0]
+    coef = model.coef_[0]
+
+    assert isinstance(model, sklearn.linear_model._logistic.LogisticRegression)
+    assert coef[pclass_index] == approx(-1.30651903)
+    assert coef[sex_index] == approx(2.33324996)
+    assert coef[age_index] == approx(-0.03750101)
 
