@@ -22,3 +22,6 @@ def train_model():
     titanic = pd.read_csv('https://raw.githubusercontent.com/AC4RM/AC4RM-dataset/main/homework/titanic.csv',
                           index_col=0)
 
+
+regex_pattern = ' '
+

@@ -1,10 +1,12 @@
 from homework import *
 from pytest import approx
+from pathlib import Path
 import numpy as np
 import sqlite3
 import pandas as pd
-import requests
 import sklearn
+import urllib.request
+import re
 
 
 def test_python():
@@ -13,11 +15,7 @@ def test_python():
 
 
 def test_sql():
-    url = "https://docs.google.com/uc?export=download&id=1BzjCEmvPdi9PZnFGGl7L9N8wSITrrcWf"
-
-    with open('data.db', 'wb') as out_file:
-        content = requests.get(url).content
-        out_file.write(content)
+    urllib.request.urlretrieve('https://github.com/AC4RM/AC4RM-dataset/blob/main/sql/data.db?raw=true', 'data.db')
 
     con = sqlite3.connect('data.db')  # open a database file
 
@@ -29,6 +27,7 @@ def test_sql():
     assert set(product_df['quantity_in_stock']) == set([49, 38, 70])
     assert customer_df[mask].shape[0] == customer_df.shape[0]
 
+    Path('data.db').unlink(missing_ok=True)
 
 
 def test_model():
@@ -43,4 +42,11 @@ def test_model():
     assert coef[pclass_index] == approx(-1.30651903)
     assert coef[sex_index] == approx(2.33324996)
     assert coef[age_index] == approx(-0.03750101)
+
+
+def test_regex():
+    assert '[' in regex_pattern and ']' in regex_pattern
+    assert re.search(regex_pattern, 'Afcd')
+    assert re.search(regex_pattern, 'xyZa')
+    assert not re.search(regex_pattern, 'fig2')
 

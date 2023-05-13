@@ -20,3 +20,8 @@
      - using panda series `apply` method in a lambda function, where the lambda function is defined using the above dictionary
    - The `PClass` column can be treated as an ordinal categorical column. If so, we only need to convert the string values into integer labels
    - Train a logistic regression model using the full dataset and return the model
+
+4. Write a regex pattern that will match any letter in sequence `ABCDEabcde`. You need to use `[]` in the regex pattern. For example
+   - `re.search(regex_pattern, 'Afcd')` => Match
+   - `re.search(regex_pattern, 'xyZa')` => Match
+   - `re.search(regex_pattern, 'fig2')` => Not match
