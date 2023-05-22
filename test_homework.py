@@ -1,6 +1,7 @@
 from homework import *
 from pytest import approx
 from pathlib import Path
+from collections import Counter
 import numpy as np
 import sqlite3
 import pandas as pd
@@ -49,4 +50,15 @@ def test_regex():
     assert re.search(regex_pattern, 'Afcd')
     assert re.search(regex_pattern, 'xyZa')
     assert not re.search(regex_pattern, 'fig2')
+
+
+def test_monte_carlo():
+    results = []
+    np.random.seed(42)
+    for i in range(5000):
+        result = simple_bettor_v3(10000, 3000, 20)
+        results.append(result)
+
+    assert isinstance(results[0], list)
+    assert Counter([len(x) for x in results]).most_common(1)[0][0] == 21
 
