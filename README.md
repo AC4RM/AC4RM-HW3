@@ -24,5 +24,5 @@
    - `re.search(regex_pattern, 'fig2')` => Not match
 5. Store the "price paths" of each gambler
    - Copy the `play_round` function from the previous homework.
-   - Modify the `simple_better_v3` function so that it stores the funds value on each loop and append it to a list
+   - Modify the `simple_bettor_v3` function so that it stores the funds value on each loop and append it to a list
    - The function should return the entire path.
