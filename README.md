@@ -12,12 +12,12 @@
    - Return products with quantity in stock equal to 49, 38, 70
    - Return customers born between 1990-01-01 and 2000-01-01
 3. We will use the titanic dataset to train a logistic regression model
-   - Remove the `Name` column and the category in the `PClass` column that only have one observation
+   - Remove the `Name` and `Sex` column and the category in the `PClass` column that only have one observation
    - Impute the missing values in the `Age` column using the means of the corresponding `PClass` & `SexCode` groups which the samples fall in.
      - You can convert the `groupby` result into a dictionary using `to_dict` method
      - using panda series `apply` method in a lambda function, where the lambda function is defined using the above dictionary
    - The `PClass` column can be treated as an ordinal categorical column. If so, we only need to convert the string values into integer labels
-   - Train a logistic regression model using the full dataset and return the model
+   - Train a logistic regression model using the `PClass`, `SexCode` and `Age` features to predict the `Survived` column. Return the logistic regression model.
 4. Write a regex pattern that will match any letter in sequence `ABCDEabcde`. You need to use `[]` in the regex pattern. For example
    - `re.search(regex_pattern, 'Afcd')` => Match
    - `re.search(regex_pattern, 'xyZa')` => Match
